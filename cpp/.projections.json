@@ -1,0 +1,12 @@
+{
+  "src/*.cc": {
+    "alternate": "src/{}.h"
+  },
+  "src/*.h": {
+    "alternate": "src/{}.cc"
+  },
+  "test/ca/*_test.cc": {
+    "type": "test",
+    "alternate": "src/ca/{}.cc"
+  }
+}

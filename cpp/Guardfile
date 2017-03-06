@@ -1,0 +1,6 @@
+guard :shell, run_all: 'make test' do
+  watch(/^(.*)\.(cc|h)$/) do |m|
+    puts "\e[36m\n#{Time.now.strftime('%H:%M:%S')} - Changed #{m[0]}\e[0m"
+    system 'make test'
+  end
+end
