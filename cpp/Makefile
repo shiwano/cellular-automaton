@@ -12,7 +12,7 @@ CXXFLAGS = -Wall -O3 -std=c++11 -I/usr/include -I$(SRC_DIR)
 LDFLAGS = -L/usr/lib -L$(LIB_DIR)
 AR = ar rcs
 MKDIR_P = mkdir -p
-RM_RF = rm -Rf
+RM_R = rm -R
 
 SHARED_LIB_EXT = .so
 STATIC_LIB_EXT = .a
@@ -61,7 +61,7 @@ test: $(TARGET_TEST)
 	$(TARGET_TEST)
 
 clean:
-	$(RM_RF) $(BIN_DIR) $(LIB_DIR) $(OBJ_DIR)
+	$(RM_R) $(BIN_DIR) $(LIB_DIR) $(OBJ_DIR)
 
 $(TARGET_SHARED_LIB): $(LIB_DIR) $(LIB_OBJS)
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) $(LIBS) $(SHARED_LIB_FLAGS) -o $@ $(LIB_OBJS)
@@ -86,4 +86,4 @@ $(LIB_DIR):
 	@$(MKDIR_P) $(LIB_DIR)
 
 -include $(DEPS)
-.PHONY: all cli shared_lib test clean
+.PHONY: default all cli shared_lib static_lib test clean
