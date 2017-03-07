@@ -5,16 +5,16 @@ namespace ca {
     width_ = width;
     height_ = height;
 
-    auto cellsLength = width_ * height_;
-    cells_ = Cells(cellsLength);
-    for (int i = 0; i < cellsLength; ++i) {
-      std::unique_ptr<Cell> cell1(new Cell());
-      cells_[i] = std::move(cell1);
+    auto cells_length = width_ * height_;
+    cells_ = Cells(cells_length);
+    for (int i = 0; i < cells_length; ++i) {
+      std::unique_ptr<Cell> cell(new Cell());
+      cells_[i] = std::move(cell);
     }
 
-    cells_as_str = std::string(cellsLength + height_, kBlankChar);
+    cells_as_str_ = std::string(cells_length + height_, kBlankChar);
     for (int i = 0; i < height; ++i) {
-      cells_as_str[(i + 1) * width_ + i] = '\n';
+      cells_as_str_[(i + 1) * width_ + i] = '\n';
     }
   }
 
@@ -28,10 +28,8 @@ namespace ca {
     if (x < 0 || x >= width_) { return; }
     if (y < 0 || y >= height_) { return; }
     cells_[x + width_ * y]->SetLife(true);
-    cells_as_str[x + width_ * y + y] = kCellChar;
+    cells_as_str_[x + width_ * y + y] = kCellChar;
   }
-
-  int Board::Step() { return step_; }
 
   void Board::ToNextStep() {
     for (int i = 0; i < cells_.size(); ++i) {
@@ -40,16 +38,12 @@ namespace ca {
       auto neighbors_count = CountAliveNeighbors(x, y);
       cells_[i]->ToNextStep(neighbors_count);
 
-      cells_as_str[i + y] = cells_[i]->IsAlive(step_ + 1) ?  kCellChar : kBlankChar;
+      cells_as_str_[i + y] = cells_[i]->IsAlive(step_ + 1) ?  kCellChar : kBlankChar;
       if (x == width_ - 1) {
-        cells_as_str[i + y + 1] = '\n';
+        cells_as_str_[i + y + 1] = '\n';
       }
     }
     ++step_;
-  }
-
-  const std::string & Board::ToString() {
-    return cells_as_str;
   }
 
   int Board::CountAliveNeighbors(int x, int y) {

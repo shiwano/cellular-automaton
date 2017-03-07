@@ -15,8 +15,9 @@ namespace ca {
     bool IsCellAlive(int x, int y);
     void MakeCellAlive(int x, int y);
     void ToNextStep();
-    int Step();
-    const std::string & ToString();
+
+    int Step() { return step_; }
+    const std::string & ToString() { return cells_as_str_; }
   private:
     const char kCellChar = 'O';
     const char kBlankChar = '_';
@@ -25,7 +26,7 @@ namespace ca {
     int width_ = 0;
     int height_ = 0;
     Cells cells_;
-    std::string cells_as_str;
+    std::string cells_as_str_;
 
     int CountAliveNeighbors(int x, int y);
   };

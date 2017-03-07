@@ -6,7 +6,7 @@
 #include <memory>
 #include <random>
 
-void runGame(int w, int h) {
+void run(int w, int h) {
   std::random_device rand;
   std::mt19937 mt(rand());
   std::uniform_real_distribution<double> rand0_1(0, 1);
@@ -27,7 +27,7 @@ void runGame(int w, int h) {
   while (true) {
     erase();
     mvaddstr(0, 0, step_label.c_str());
-    mvaddstr(0, 7, std::to_string(b.Step()).c_str());
+    mvaddstr(0, 6, std::to_string(b.Step()).c_str());
     mvaddstr(1, 0, b.ToString().c_str());
     refresh();
 
@@ -57,7 +57,7 @@ int main(int argc, char* argv[]) {
   getmaxyx(stdscr, h, w);
 
   if (w >= 10 && h >= 10) {
-    runGame(w, h);
+    run(w, h);
   } else {
     std::cout << "Screen size is not enough (required 10x10)." << std::endl;
   }
