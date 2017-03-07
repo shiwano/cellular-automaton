@@ -1,7 +1,7 @@
 #include "./cell.h"
 
 namespace ca {
-  bool Cell::IsAlive(int step) {
+  bool Cell::IsAlive(int step) const {
     return step_ == step ? state_ : previous_state_;
   }
 

@@ -4,7 +4,7 @@
 namespace ca {
   class Cell {
   public:
-    bool IsAlive(int step);
+    bool IsAlive(int step) const;
     void SetLife(bool is_alive);
     void ToNextStep(int neighbors_count);
 

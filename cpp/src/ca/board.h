@@ -1,5 +1,5 @@
-#ifndef CA_CA_TABLE_H_
-#define CA_CA_TABLE_H_
+#ifndef CA_CA_BOARD_H_
+#define CA_CA_BOARD_H_
 
 #include <vector>
 #include <memory>
@@ -16,8 +16,8 @@ namespace ca {
     void MakeCellAlive(int x, int y);
     void ToNextStep();
 
-    int Step() { return step_; }
-    const std::string & ToString() { return cells_as_str_; }
+    int Step() const { return step_; }
+    const std::string & ToString() const { return cells_as_str_; }
   private:
     const char kCellChar = 'O';
     const char kBlankChar = '_';
@@ -32,4 +32,4 @@ namespace ca {
   };
 }
 
-#endif  // CA_CA_TABLE_H_
+#endif  // CA_CA_BOARD_H_
